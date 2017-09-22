@@ -1,4 +1,4 @@
-# Minitest::Reporter::Litr
+# Minitest::Reporters::LitrReporter
 
 Minitest reporter for [litr](https://github.com/Lothiraldan/litr)
 
@@ -7,7 +7,7 @@ Minitest reporter for [litr](https://github.com/Lothiraldan/litr)
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'minitest-reporter-litr'
+gem 'minitest-reporters-litr'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install minitest-reporter-litr
+    $ gem install minitest-reporters-litr
 
 ## Usage
 
