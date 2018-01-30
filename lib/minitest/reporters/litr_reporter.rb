@@ -15,11 +15,11 @@ module Minitest
         super
         test_location = location(test)
 
-        p test.methods.sort if test.skipped?
+        # p test.methods.sort if test.skipped?
 
         print JSON.generate(
           _type: 'test_result', id: identifier(test), outcome: outcome(test), test_name: identifier(test),
-          duration: test.time, errors: errors(test),
+          duration: test.time, error: error(test),
           file: test_location[0], line: test_location[1]
         )
         print "\n"
@@ -31,10 +31,9 @@ module Minitest
         test.method(test.name.to_s).source_location
       end
 
-      def errors(test)
-        test.failures.map do |failure|
-          Hash[message: failure.message, backtrace: failure.backtrace]
-        end
+      def error(test)
+        failure = test.failures.first
+        failure ? Hash[message: failure.message, backtrace: failure.backtrace] : Hash[]
       end
 
       def identifier(test)
@@ -42,10 +41,10 @@ module Minitest
       end
 
       def outcome(test)
-        return 'skip' if test.skipped?
+        return 'skipped' if test.skipped?
         return 'passed' if test.passed?
         return 'error' if test.error?
-        return 'failure' if test.failure
+        return 'failed' if test.failure
       end
     end
   end
